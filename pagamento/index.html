@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -7,27 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Checkout</title>
 	<meta name="description" content="Plataforma de pagamentos" />
-	<link rel="apple-touch-icon" href="">
-	<link rel="icon" href="">
     <link rel="stylesheet" href="css/styles.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
     <!-- Meta Pixel Code -->
     <script>
       !function(f,b,e,v,n,t,s)
@@ -38,112 +22,63 @@
       t.src='https://connect.facebook.net/en_US/fbevents.js';
       s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script');
-    
-      fbq('init', '1532292187820933'); 1496809261809994
+      fbq('init', '1532292187820933');
       fbq('track', 'PageView');
     </script>
-    <noscript>
-      <img height="1" width="1" style="display:none"
-           src="https://www.facebook.com/tr?id=1532292187820933&ev=PageView&noscript=1"/>
-    </noscript>
-    <!-- End Meta Pixel Code -->
-    	<style>
-    /* outros visuais */
-    .contrib h3 {margin: 1rem 0; font-weight:500}
-    .contrib span {margin: 1rem 0; font-weight:500}
-    .valor-total h3 {margin: 1rem 0; font-weight:500;}
-    .valor-total span {color: green; font-weight:600}
-	</style>
+    <style>
+      .contrib h3 {margin: 1rem 0; font-weight:500}
+      .contrib span {margin: 1rem 0; font-weight:500}
+      .valor-total h3 {margin: 1rem 0; font-weight:500;}
+      .valor-total span {color: green; font-weight:600}
+    </style>
+  </head>
 	<body>
     <main>
-      <!-- Tela do PIX (inicialmente oculta) -->
       <div id="pixScreen" style="display: none">
-
 		<div class="pix-container">
-        <img src="./images/logo.svg" alt="Logo" style="
-                  display: block;
-                  margin: auto;
-                  padding: 0;
-                  width: auto;
-                  height: 32px;
-				  margin-bottom:1rem;
-                ">
+        <img src="./images/logo.svg" alt="Logo" style="display: block; margin: auto; width: auto; height: 32px; margin-bottom:1rem;">
             <div class="contrib">
-                <h3 style="
-                    margin: 10px 0 5px;
-                    font-size: 1.2rem;
-                    color: #484848;
-                    text-transform: uppercase;
-                    font-weight: bold;
-                ">
+                <h3 style="margin: 10px 0 5px; font-size: 1.2rem; color: #484848; text-transform: uppercase; font-weight: bold;">
                     DOE AGORA 💚                </h3>
-                <span style="
-                    margin: 0 0 20px;
-                    font-size: 0.8rem;
-                    color: rgba(72, 72, 72, 0.6);
-                    font-family: Arial, sans-serif
-                ">
+                <span style="margin: 0 0 20px; font-size: 0.8rem; color: rgba(72, 72, 72, 0.6); font-family: Arial, sans-serif">
                     Sua contribuição ajuda muito!                </span>
             </div>
 			<div class="qr-code-container">
 			  <div id="qrcode"></div>
 			</div>
-
-			<div class="valor-total"><h3>Valor total: <span id="total-exibicao">R$ 50,00</span></h3></div>
-			<p class="pix-copy-text">
-			  Copie o código Pix abaixo e cole em seu app para finalizar o pagamento.
-			</p>
-
+			<div class="valor-total"><h3>Valor total: <span id="total-exibicao">R$ --</span></h3></div>
+			<p class="pix-copy-text">Copie o código Pix abaixo e cole em seu app para finalizar o pagamento.</p>
 			<div class="pix-code-container">
 			  <input type="text" id="pixCode" readonly />
 			  <button id="copyPixButton" class="copy-button">
-				<svg viewBox="0 0 24 24" width="24" height="24">
-				  <path
-					d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"
-				  ></path>
-				</svg>
+				<svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg>
 				COPIAR CÓDIGO
 			  </button>
 			</div>
-
 			<div class="payment-instructions">
 			  <h3 style="text-align:center">Como pagar?</h3>
 			  <div class="instruction-step">
-				<div class="step-icon">
-				  <i class="ph ph-bank"></i>
-				</div>
+				<div class="step-icon"><i class="ph ph-bank"></i></div>
 				<p>Abra o app do seu banco e entre no ambiente Pix</p>
 			  </div>
 			  <div class="instruction-step">
-				<div class="step-icon">
-				  <i class="ph ph-qr-code"></i>
-				</div>
-				<p>
-				  Escolha Pagar com QR Code e aponte a câmera para o código ao lado.
-				</p>
+				<div class="step-icon"><i class="ph ph-qr-code"></i></div>
+				<p>Escolha Pagar com QR Code e aponte a câmera para o código ao lado.</p>
 			  </div>
 			  <div class="instruction-step">
-				<div class="step-icon">
-				  <i class="ph ph-check-circle"></i>
-				</div>
+				<div class="step-icon"><i class="ph ph-check-circle"></i></div>
 				<p>Confirme as informações e finalize seu pagamento.</p>
 			  </div>
 			</div>
 		</div>
         <footer>
           <button class="security-button">
-            <svg viewBox="0 0 24 24" class="security-icon">
-              <path
-                d="M11.488 21.754c.294.157.663.156.957-.001 8.012-4.304 8.581-12.713 8.574-15.104a.988.988 0 0 0-.596-.903l-8.05-3.566a1.005 1.005 0 0 0-.813.001L3.566 5.747a.99.99 0 0 0-.592.892c-.034 2.379.445 10.806 8.514 15.115zM8.674 10.293l2.293 2.293 4.293-4.293 1.414 1.414-5.707 5.707-3.707-3.707 1.414-1.414z"
-              ></path>
-            </svg>
+            <svg viewBox="0 0 24 24" class="security-icon"><path d="M11.488 21.754c.294.157.663.156.957-.001 8.012-4.304 8.581-12.713 8.574-15.104a.988.988 0 0 0-.596-.903l-8.05-3.566a1.005 1.005 0 0 0-.813.001L3.566 5.747a.99.99 0 0 0-.592.892c-.034 2.379.445 10.806 8.514 15.115zM8.674 10.293l2.293 2.293 4.293-4.293 1.414 1.414-5.707 5.707-3.707-3.707 1.414-1.414z"></path></svg>
             Ambiente seguro
           </button>
         </footer>
       </div>
-
-      <!-- Adicione após o form e antes da tela do PIX -->
-      <div id="loadingScreen" class="loading-screen" style="display: none">
+      <div id="loadingScreen" class="loading-screen" style="display: flex">
         <div class="loading-content">
           <div class="loading-spinner"></div>
           <h2>Gerando seu PIX...</h2>
@@ -152,150 +87,20 @@
       </div>
     </main>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-	<script>
+	<script type="module">
+        import ParadisePixAPI from '../js/ParadisePixAPI.js';
+        const pixAPI = new ParadisePixAPI();
+
 		const upsellUrl = "/salveaurora/obrigado";
-		const oferta = "ebookice";
-		let valorTotal = 50; // Preço base (PHP)
+		let valorTotal = 50; 
         let id_transacao = null;
 
-		// ################## CONFIGURAÇÃO UTMIFY ################
-		const utmifyToken = "lmbDctVAAl8vMjkqf499gMJ6EJxJNsDG9NcL";
-		const utmifyEnabled = true;
-		const utmifyPlatform = "Salve a Aurora";
-		const utmifyProductId = "ebookice";
-		const utmifyProductName = "ebookice";
-		const utmifyGatewayFeePercent = 0;
-		const utmifyGatewayFeeFixed = 0;
-
-		// Variáveis para armazenar dados do pedido
-		let dataCriacaoPedido = null; // Armazena data de criação do pedido
-		let trackingParams = null; // Armazena parâmetros de tracking
-
-		// Função para obter parâmetros UTM da URL
-		function getTrackingParameters() {
-			const urlParams = new URLSearchParams(window.location.search);
-			
-			// Primeiro tenta capturar diretamente da URL
-			let params = {
-				src: urlParams.get('src') || null,
-				sck: urlParams.get('sck') || null,
-				utm_source: urlParams.get('utm_source') || null,
-				utm_campaign: urlParams.get('utm_campaign') || null,
-				utm_medium: urlParams.get('utm_medium') || null,
-				utm_content: urlParams.get('utm_content') || null,
-				utm_term: urlParams.get('utm_term') || null
-			};
-			
-			// Se não encontrou na URL, tenta decodificar do parâmetro 'utm' (caso venha codificado)
-			if (!params.utm_source && urlParams.get('utm')) {
-				try {
-					const utmDecoded = decodeURIComponent(urlParams.get('utm'));
-					const utmParams = new URLSearchParams(utmDecoded);
-					
-					params.src = params.src || utmParams.get('src') || null;
-					params.sck = params.sck || utmParams.get('sck') || null;
-					params.utm_source = params.utm_source || utmParams.get('utm_source') || null;
-					params.utm_campaign = params.utm_campaign || utmParams.get('utm_campaign') || null;
-					params.utm_medium = params.utm_medium || utmParams.get('utm_medium') || null;
-					params.utm_content = params.utm_content || utmParams.get('utm_content') || null;
-					params.utm_term = params.utm_term || utmParams.get('utm_term') || null;
-				} catch (e) {
-					console.warn('Erro ao decodificar parâmetro utm:', e);
-				}
-			}
-			
-			return params;
-		}
-
-		// Função para formatar data em UTC (YYYY-MM-DD HH:MM:SS)
-		function formatDateUTC(date) {
-			const year = date.getUTCFullYear();
-			const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-			const day = String(date.getUTCDate()).padStart(2, '0');
-			const hours = String(date.getUTCHours()).padStart(2, '0');
-			const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-			const seconds = String(date.getUTCSeconds()).padStart(2, '0');
-			return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-		}
-
-		// Função para calcular taxas do gateway
-		function calculateCommission(valorReais) {
-			const valorCentavos = Math.round(valorReais * 100);
-			const taxaPercentual = Math.round(valorCentavos * (utmifyGatewayFeePercent / 100));
-			const taxaFixa = Math.round(utmifyGatewayFeeFixed * 100);
-			const gatewayFeeInCents = taxaPercentual + taxaFixa;
-			const userCommissionInCents = valorCentavos - gatewayFeeInCents;
-			
-			return {
-				totalPriceInCents: valorCentavos,
-				gatewayFeeInCents: gatewayFeeInCents,
-				userCommissionInCents: userCommissionInCents > 0 ? userCommissionInCents : valorCentavos
-			};
-		}
-
-		// Função para criar objeto customer sem campos null
-		function createCustomerObject() {
-			const customer = {
-				firstName: nomePreDefinido.split(' ')[0] || nomePreDefinido, // Primeiro nome
-				lastName: nomePreDefinido.split(' ').slice(1).join(' ') || '', // Resto do nome
-				email: emailPreDefinido || 'doador@exemplo.com',
-				country: 'BR'
-			};
-			
-			// Adiciona campos opcionais apenas se tiverem valor
-			if (telefonePreDefinido) customer.phone = telefonePreDefinido;
-			if (cpfPreDefinido) customer.document = cpfPreDefinido;
-			
-			// Não inclui IP se for null - a API não aceita null
-			
-			return customer;
-		}
-
-		// Função para enviar pedido ao Utmify
-		async function enviarPedidoUtmify(orderData) {
-			if (!utmifyEnabled || !utmifyToken) {
-				console.log('Utmify desabilitado ou token não configurado');
-				return;
-			}
-
-			console.log('🚀 Enviando pedido ao Utmify:', JSON.stringify(orderData, null, 2));
-
-			try {
-				const response = await fetch('https://api.utmify.com.br/api-credentials/orders', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'x-api-token': utmifyToken
-					},
-					body: JSON.stringify(orderData)
-				});
-
-				if (response.ok) {
-					const result = await response.json();
-					console.log('✅ Pedido Utmify enviado com sucesso:', result);
-				} else {
-					const errorText = await response.text();
-					console.error('❌ Erro ao enviar pedido Utmify:', response.status, response.statusText, errorText);
-				}
-			} catch (error) {
-				console.error('❌ Erro ao enviar pedido Utmify:', error.message);
-			}
-		}
-
-		// Dados predefinidos para gerar o PIX automaticamente
-		const nomePreDefinido = "Vanessa Mendes Ribeiro"; // Nome do cliente
+		const nomePreDefinido = "Vanessa Mendes Ribeiro";
 		const emailPreDefinido = "vanessamendesribeiro0212@hotmail.com";
 		const cpfPreDefinido = "08430576614";
-		const telefonePreDefinido = "99964848289"; // Telefone do cliente (sem máscara)
-		const valorPreDefinido = 50; // Valor do PIX - Formato (int) xx.xx, separados por ponto
+		const telefonePreDefinido = "99964848289";
 
-	// Adiciona os listeners para os campos
-	document.addEventListener("DOMContentLoaded", function () {
-		// Captura parâmetros de tracking logo no início, quando a página carrega
-		trackingParams = getTrackingParameters();
-		console.log('📊 Parâmetros de tracking capturados:', trackingParams);
-		
-		// Puxar parâmetros
+	document.addEventListener("DOMContentLoaded", async function () {
 		const urlParams = new URLSearchParams(window.location.search);
 		const valorUrl = urlParams.get('valor');
 
@@ -304,239 +109,75 @@
 			document.getElementById("total-exibicao").textContent = "R$ " + valorTotal.toLocaleString("pt-BR", { minimumFractionDigits: 2 });
 		}
 
-		// Mostra a tela de loading
-		document.getElementById("loadingScreen").style.display = "flex";
+        try {
+            const transaction = await pixAPI.createPixTransaction({
+                amount: Math.round(valorTotal * 100),
+                description: 'Doação Salve a Aurora',
+                reference: `AURORA-${Date.now()}`,
+                customer: {
+                    firstName: nomePreDefinido.split(' ')[0],
+                    lastName: nomePreDefinido.split(' ').slice(1).join(' '),
+                    email: emailPreDefinido,
+                    phone: telefonePreDefinido,
+                    document: cpfPreDefinido,
+                    country: 'BR'
+                }
+            });
 
-		// Remover parâmetros específicos do envio de UTM
-		params.delete("valor");
-		//params.delete("email");
-		//params.delete("nome");
-		//params.delete("cpf");
-		//params.delete("telefone");
-		//params.delete("titulos");
+            if (transaction && transaction.id) {
+                id_transacao = transaction.id;
 
-		// Garantir que algo será enviado, mesmo que vazio
-		const utmString = params.toString() || "utm_source=direct";
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'InitiateCheckout', { value: valorTotal, currency: 'BRL' });
+                }
 
-		const formData = {
-			acao: "criar",
-			oferta: oferta,
-			valor: valorTotal, // Valor do PIX
-			nome: nomePreDefinido,
-			email: emailPreDefinido,
-			cpf: cpfPreDefinido,     // CPF do cliente
-			telefone: telefonePreDefinido,
-			utm: encodeURIComponent(utmString)
-		};
+                document.getElementById("loadingScreen").style.display = "none";
+                document.getElementById("pixScreen").style.display = "flex";
 
-			const url = new URL("api/gateway.php", window.location);
-			Object.keys(formData).forEach(key => {
-				url.searchParams.set(key, formData[key]);
-			});
+                if (transaction.qr_code_base64) {
+                    const img = document.createElement('img');
+                    img.src = transaction.qr_code_base64;
+                    img.style.maxWidth = '100%';
+                    document.getElementById("qrcode").innerHTML = '';
+                    document.getElementById("qrcode").appendChild(img);
+                } else {
+                    document.getElementById("qrcode").innerHTML = '';
+                    new QRCode(document.getElementById("qrcode"), transaction.qr_code);
+                }
 
-			// Exibe a tela de loading enquanto aguarda a resposta
-			document.getElementById("loadingScreen").style.display = "flex";
-
-			// Envia os dados para a API para gerar o código PIX
-			fetch(url)
-				.then(response => response.json())
-				.then(data => {
-					if (data.erro) {
-						throw new Error(data.erroMsg || "Erro desconhecido na resposta da API");
-					}
-
-					if (data.pixCode && data.payment_id) {
-                                                if (typeof fbq !== 'undefined') {
-                            fbq('track', 'InitiateCheckout', {
-								value: Number(valorTotal.toFixed(2)),  // Garante 2 casas decimais como número
-                        		currency: 'BRL',
-                        		num_items: 1
-                        	});
-                            console.log('✅ Evento de InitiateCheckout enviado para o Facebook Pixel');
-                        } else {
-                            console.warn('⚠️ Facebook Pixel não disponível para enviar o evento de InitiateCheckout');
-                        }
-                        						
-						// Armazena dados
-						id_transacao = data.payment_id; // payment_id retornado pela API
-						dataCriacaoPedido = new Date();
-						
-						// Se trackingParams ainda não foi capturado, captura agora (fallback)
-						if (!trackingParams) {
-							trackingParams = getTrackingParameters();
-							console.log('⚠️ Parâmetros capturados no fallback:', trackingParams);
-						}
-						
-						// Calcula comissões
-						const commission = calculateCommission(valorTotal); // valorTotal = valor da doação
-						
-						// Envia pedido ao Utmify quando QR code é gerado (status: waiting_payment)
-						const orderDataGerado = {
-							orderId: data.payment_id, // ID do pagamento
-							platform: utmifyPlatform,
-							paymentMethod: 'pix',
-							status: 'waiting_payment',
-							createdAt: formatDateUTC(dataCriacaoPedido),
-							approvedDate: null,
-							refundedAt: null,
-							customer: createCustomerObject(),
-							products: [{
-								id: utmifyProductId,
-								name: utmifyProductName,
-								planId: null,
-								planName: null,
-								quantity: 1,
-								priceInCents: commission.totalPriceInCents
-							}],
-							trackingParameters: trackingParams,
-							commission: commission
-						};
-
-						// Envia pedido ao Utmify quando QR code é gerado
-						console.log('📤 Preparando envio para Utmify - QR Code gerado');
-						enviarPedidoUtmify(orderDataGerado);
-						
-						// Esconde a tela de loading após a resposta da API
-						document.getElementById("loadingScreen").style.display = "none";
-
-						// Oculta o formulário e exibe a tela com o código PIX
-						document.getElementById("pixScreen").style.display = "flex";
-
-						// Usa imagem base64 se disponível (evita overflow na biblioteca QRCode.js)
-						if (data.pixImage) {
-							// Usa a imagem base64 retornada pela API
-							const img = document.createElement('img');
-							img.src = 'data:image/png;base64,' + data.pixImage;
-							img.style.maxWidth = '100%';
-							img.style.height = 'auto';
-							document.getElementById("qrcode").innerHTML = '';
-							document.getElementById("qrcode").appendChild(img);
-						} else if (data.pixImageUrl) {
-							// Usa a URL da imagem se disponível
-							const img = document.createElement('img');
-							img.src = data.pixImageUrl;
-							img.style.maxWidth = '100%';
-							img.style.height = 'auto';
-							document.getElementById("qrcode").innerHTML = '';
-							document.getElementById("qrcode").appendChild(img);
-						} else {
-							// Gera QR code localmente - código PIX tem 174 caracteres, dentro do limite
-							// Limpa o container antes de gerar
-							document.getElementById("qrcode").innerHTML = '';
-							// QRCode.js aceita string diretamente como segundo parâmetro
-							new QRCode(document.getElementById("qrcode"), data.pixCode);
-						}
-
-						// Preenche o campo com o código PIX
-						document.getElementById("pixCode").value = data.pixCode;
-
-						// Inicia a verificação do pagamento
-						startPaymentCheck(data.payment_id);
-					}
-				})
-				.catch(error => {
-					// Esconde a tela de loading em caso de erro
-					document.getElementById("loadingScreen").style.display = "none";
-					console.error("Erro ao gerar PIX:", error);
-					alert("Erro ao gerar o PIX: " + error.message + "\nPor favor, tente novamente.");
-				});
-		});
-
-	// Função para copiar o código PIX
-	document
-	.getElementById("copyPixButton")
-	.addEventListener("click", function () {
-		const pixCode = document.getElementById("pixCode"); // copia o valor do campo <input type="text" id="pixCode" readonly />
-		pixCode.select();
-		document.execCommand("copy");
-		this.innerHTML =
-			'<svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg>COPIADO!';
-		setTimeout(() => {
-			this.innerHTML =
-			'<svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path></svg>COPIAR CÓDIGO';
-		}, 2000);
+                document.getElementById("pixCode").value = transaction.qr_code;
+                startPaymentCheck(id_transacao);
+            }
+        } catch (error) {
+            document.getElementById("loadingScreen").style.display = "none";
+            console.error("Erro API:", error);
+            alert("Erro ao gerar PIX. Tente novamente.");
+        }
 	});
 
-	// Função para verificar o status do pagamento
+	document.getElementById("copyPixButton").addEventListener("click", function () {
+		const pixCode = document.getElementById("pixCode");
+		pixCode.select();
+		document.execCommand("copy");
+		this.innerHTML = 'COPIADO!';
+		setTimeout(() => { this.innerHTML = 'COPIAR CÓDIGO'; }, 2000);
+	});
+
 	function startPaymentCheck(payment_id) {
-		const checkPayment = async () => {
-			const url = new URL("api/gateway.php", window.location);
-			url.searchParams.set("acao", "verificar");
-			url.searchParams.set("payment_id", payment_id);
-
+		const checkStatus = async () => {
 			try {
-				const response = await fetch(url);
-				const data = await response.json();
+				const data = await pixAPI.getTransactionById(payment_id);
 				const status = data?.status?.toLowerCase();
-				if (status === "approved" || status === "completed") {
-
-						// Envia pedido ao Utmify quando pagamento é confirmado (status: paid)
-						const dataAprovacao = new Date();
-						const commission = calculateCommission(valorTotal);
-						
-						const orderDataPago = {
-							orderId: id_transacao, // Mesmo ID do pagamento
-							platform: utmifyPlatform,
-							paymentMethod: 'pix',
-							status: 'paid',
-							createdAt: formatDateUTC(dataCriacaoPedido), // Mesma data de criação
-							approvedDate: formatDateUTC(dataAprovacao),
-							refundedAt: null,
-							customer: createCustomerObject(),
-							products: [{
-								id: utmifyProductId,
-								name: utmifyProductName,
-								planId: null,
-								planName: null,
-								quantity: 1,
-								priceInCents: commission.totalPriceInCents
-							}],
-							trackingParameters: trackingParams, // Mesmos parâmetros de tracking
-							commission: commission
-						};
-
-						enviarPedidoUtmify(orderDataPago);
-
-                                                // Dispara o evento de compra do Facebook
-                        if (typeof fbq !== 'undefined') {
-                            fbq('track', 'Purchase', {
-                                currency: 'BRL',
-                                value: Number(valorTotal.toFixed(2)),  // Garante 2 casas decimais como número
-                                transaction_id: id_transacao
-                            });
-                            console.log('✅ Evento de compra enviado para o Facebook Pixel');
-                        } else {
-                            console.warn('⚠️ Facebook Pixel não disponível para enviar o evento de compra');
-                        }
-                        
-					//const params = new URLSearchParams(window.location.search);
-					//params.set("upsell", "1");
-					//window.location.href = `${upsellUrl}?${params.toString()}`;
+				if (status === "approved" || status === "completed" || status === "paid") {
                     const upsell = new URL(upsellUrl, window.location.href);
-                    const currentParams = new URLSearchParams(window.location.search);
-                    
-                    // Adiciona os parâmetros da página atual no upsellUrl (sem sobrescrever os já existentes no upsellUrl)
-                    for (const [key, value] of currentParams.entries()) {
-                    	if (!upsell.searchParams.has(key)) {
-                    		upsell.searchParams.set(key, value);
-                    	}
-                    }
-
-					//const nome = document.getElementById("name").value;
-					//const telefone = document.getElementById("phone").value.replace(/\D/g, "");
-                    //upsell.searchParams.set("nome", nome);
-                    //upsell.searchParams.set("telefone", telefone);
-
-                    //upsell.searchParams.delete("up");
-                    upsell.searchParams.delete("valor");
-                    //upsell.searchParams.set("upsell", "1"); // Força o parâmetro upsell=1, mesmo que já exista
-                    window.location.href = upsell.toString(); // Redireciona
+                    window.location.href = upsell.toString();
 				}
 			} catch (error) {
-				console.error("Erro ao verificar pagamento:", error);
+				console.error("Erro polling:", error);
 			}
 		};
-
-		setInterval(checkPayment, 1500); // Verifica se o pix foi pago a cada 10 segundos
+		setInterval(checkStatus, 3000);
 	}
 	</script>
+  </body>
+</html>
