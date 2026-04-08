@@ -185,36 +185,6 @@ h1 {
     color: white;
 }
 
-.donor-form {
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 15px;
-    outline: none;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-    border-color: #22c55e;
-}
-
 .summary {
     margin-bottom: 20px;
 }
@@ -371,22 +341,6 @@ h1 {
             </div>
         </div>
 
-        <div class="section-title">Seus Dados</div>
-        <div class="donor-form">
-            <div class="form-group">
-                <label for="donor-name">Nome Completo</label>
-                <input type="text" id="donor-name" placeholder="Como no seu documento" required>
-            </div>
-            <div class="form-group">
-                <label for="donor-email">E-mail</label>
-                <input type="email" id="donor-email" placeholder="seu@email.com" required>
-            </div>
-            <div class="form-group">
-                <label for="donor-cpf">CPF</label>
-                <input type="tel" id="donor-cpf" placeholder="000.000.000-00" maxlength="14" required>
-            </div>
-        </div>
-
         <div class="summary">
             <div class="summary-item">
                 <span>Total:</span>
@@ -421,9 +375,6 @@ h1 {
         const charityItems = document.querySelectorAll(".charity-item");
         const errorMessage = document.getElementById("error-message");
         const maxErrorMessage = document.getElementById("max-error-message");
-        const donorName = document.getElementById("donor-name");
-        const donorEmail = document.getElementById("donor-email");
-        const donorCpf = document.getElementById("donor-cpf");
 
         let baseAmount = 0;
         let additionalTotal = 0;
@@ -434,53 +385,23 @@ h1 {
             return Number(value).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        function maskCPF(value) {
-            return value
-                .replace(/\D/g, "")
-                .replace(/(\d{3})(\d)/, "$1.$2")
-                .replace(/(\d{3})(\d)/, "$1.$2")
-                .replace(/(\d{3})(\d{1,2})/, "$1-$2")
-                .replace(/(-\d{2})\d+?$/, "$1");
-        }
-
-        donorCpf.addEventListener("input", (e) => {
-            e.target.value = maskCPF(e.target.value);
-            checkFormValidity();
-        });
-
-        [donorName, donorEmail].forEach(input => {
-            input.addEventListener("input", checkFormValidity);
-        });
-
-        function checkFormValidity() {
-            const total = baseAmount + additionalTotal;
-            const isAmountValid = total >= MIN_AMOUNT && total <= MAX_AMOUNT;
-            const isNameValid = donorName.value.trim().split(" ").length >= 2;
-            const isEmailValid = donorEmail.value.includes("@") && donorEmail.value.includes(".");
-            const isCpfValid = donorCpf.value.length === 14;
-
-            if (isAmountValid && isNameValid && isEmailValid && isCpfValid) {
-                contributeButton.disabled = false;
-            } else {
-                contributeButton.disabled = true;
-            }
-        }
-
         function updateSummary() {
             const total = baseAmount + additionalTotal;
             summaryTotal.textContent = `R$ ${formatCurrency(total)}`;
             
-            if (total > MAX_AMOUNT) {
+            if (total >= MIN_AMOUNT && total <= MAX_AMOUNT) {
+                contributeButton.disabled = false;
+                errorMessage.style.display = "none";
+                maxErrorMessage.style.display = "none";
+            } else if (total > MAX_AMOUNT) {
+                contributeButton.disabled = true;
                 maxErrorMessage.style.display = "block";
                 errorMessage.style.display = "none";
-            } else if (total < MIN_AMOUNT && total > 0) {
-                errorMessage.style.display = "block";
-                maxErrorMessage.style.display = "none";
             } else {
-                errorMessage.style.display = "none";
+                contributeButton.disabled = true;
+                errorMessage.style.display = total > 0 ? "block" : "none";
                 maxErrorMessage.style.display = "none";
             }
-            checkFormValidity();
         }
 
         contributionInput.addEventListener("input", (e) => {
@@ -522,13 +443,7 @@ h1 {
 
         contributeButton.addEventListener("click", () => {
             const total = baseAmount + additionalTotal;
-            const params = new URLSearchParams(window.location.search);
-            params.set('valor', total.toFixed(2));
-            params.set('nome', donorName.value);
-            params.set('email', donorEmail.value);
-            params.set('cpf', donorCpf.value.replace(/\D/g, ""));
-            
-            window.location.href = "../pagamento/?" + params.toString();
+            redirectWithParams("../pagamento/?valor=" + total.toFixed(2));
         });
     });
     </script>

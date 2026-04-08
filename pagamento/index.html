@@ -85,9 +85,6 @@
 	document.addEventListener("DOMContentLoaded", async function () {
 		const urlParams = new URLSearchParams(window.location.search);
 		const valorUrl = urlParams.get('valor');
-        const donorName = urlParams.get('nome') || "Doador Anonimo";
-        const donorEmail = urlParams.get('email') || "contato@pagamento.com";
-        const donorCpf = urlParams.get('cpf') || "00000000000";
 
 		if (valorUrl) {
 			valorTotal = parseFloat(valorUrl.replace(",", "."));
@@ -100,10 +97,10 @@
                 description: 'Doação Salve a Aurora',
                 reference: `AURORA-${Date.now()}`,
                 customer: {
-                    name: donorName,
-                    email: donorEmail,
-                    document: donorCpf,
-                    phone: "99999999999", // Can be simplified if not collected
+                    name: "Doador Solidario",
+                    email: "doador@solidariavakin.site",
+                    document: "08430576614", // Vanessa's CPF as fallback or any valid CPF
+                    phone: "99999999999",
                     country: 'BR'
                 }
             });
