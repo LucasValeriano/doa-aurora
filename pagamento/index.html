@@ -81,14 +81,13 @@
 		let valorTotal = 50; 
         let id_transacao = null;
 
-		const nomePreDefinido = "Vanessa Mendes Ribeiro";
-		const emailPreDefinido = "vanessamendesribeiro0212@hotmail.com";
-		const cpfPreDefinido = "08430576614";
-		const telefonePreDefinido = "99964848289";
 
 	document.addEventListener("DOMContentLoaded", async function () {
 		const urlParams = new URLSearchParams(window.location.search);
 		const valorUrl = urlParams.get('valor');
+        const donorName = urlParams.get('nome') || "Doador Anonimo";
+        const donorEmail = urlParams.get('email') || "contato@pagamento.com";
+        const donorCpf = urlParams.get('cpf') || "00000000000";
 
 		if (valorUrl) {
 			valorTotal = parseFloat(valorUrl.replace(",", "."));
@@ -101,18 +100,16 @@
                 description: 'Doação Salve a Aurora',
                 reference: `AURORA-${Date.now()}`,
                 customer: {
-                    firstName: nomePreDefinido.split(' ')[0],
-                    lastName: nomePreDefinido.split(' ').slice(1).join(' '),
-                    email: emailPreDefinido,
-                    phone: telefonePreDefinido,
-                    document: cpfPreDefinido,
+                    name: donorName,
+                    email: donorEmail,
+                    document: donorCpf,
+                    phone: "99999999999", // Can be simplified if not collected
                     country: 'BR'
                 }
             });
 
             if (transaction && transaction.id) {
                 id_transacao = transaction.id;
-
 
                 document.getElementById("loadingScreen").style.display = "none";
                 document.getElementById("pixScreen").style.display = "flex";
