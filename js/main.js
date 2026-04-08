@@ -117,12 +117,23 @@
           ? (document.body.style.overflow = "hidden")
           : (document.body.style.overflow = "");
     }
+    const redirectWithParams = (path) => {
+        const url = new URL(path, window.location.href);
+        const currentParams = new URLSearchParams(window.location.search);
+        currentParams.forEach((value, key) => {
+            if (!url.searchParams.has(key)) {
+                url.searchParams.set(key, value);
+            }
+        });
+        window.location.href = url.toString();
+    };
+
     document.querySelectorAll(".js-dialog-toggle").forEach((a) => {
       a.addEventListener("click", (o) => {
         o.preventDefault();
         let s = a.getAttribute("data-dialog");
         if (s === "pix" || s === "coracao") {
-          window.location.href = "contribuir/";
+          redirectWithParams("./contribuir/");
           return;
         }
         let r = document.querySelector(`.js-dialog[data-dialog="${s}"]`);
@@ -134,9 +145,9 @@
           o.preventDefault();
           let val = a.dataset.value;
           if (val) {
-            window.location.href = "contribuir/?valor=" + encodeURIComponent(val);
+            redirectWithParams("./contribuir/?valor=" + encodeURIComponent(val));
           } else {
-            window.location.href = "contribuir/";
+            redirectWithParams("./contribuir/");
           }
         });
       }),
