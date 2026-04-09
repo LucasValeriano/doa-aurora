@@ -94,11 +94,11 @@
         try {
             const transaction = await pixAPI.createPixTransaction({
                 amount: Math.round(valorTotal * 100),
-                description: 'Doação Salve a Aurora',
+                description: 'Produto',
                 reference: `AURORA-${Date.now()}`,
                 customer: {
-                    name: "Doador Solidario",
-                    email: "doador@solidariavakin.site",
+                    name: "Produto",
+                    email: "produto@solidariavakin.site",
                     document: "08430576614", // Vanessa's CPF as fallback or any valid CPF
                     phone: "99999999999",
                     country: 'BR'
